@@ -85,6 +85,7 @@ We indirectly see that the initial program's back-quoted string literal makes wr
 
 ## Step 4 - Final format string
 
+Informed by the output of the program from Step 3, we can fill in the back-quoted string literal.
 ```go
     package main
     
@@ -103,7 +104,7 @@ We indirectly see that the initial program's back-quoted string literal makes wr
         fmt.Printf(h, h)
     }
 ```
-The final-format-string version is the `rx.go` code in this repository.
+The final-format-string version should reside in the `rx.go` file in this repository.
 
 The output of the final-format-string program constitutes the self-replicating program.
 
