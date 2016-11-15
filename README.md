@@ -1,4 +1,5 @@
 # Self-replicating Go program
+## And bonus narcissistic program!
 
 Go's `fmt` formatted I/O package has an interesting verb, "%q". Suppose your Go program has composed a string value that contains newlines, double-quote characters or other escapable characters. Pass such a string as an argument to one of the `fmt` functions (like `fmt.Printf()`) and use "%q" as the verb. `fmt.Printf()` will escape all escapable characters in the resulting output.
 
