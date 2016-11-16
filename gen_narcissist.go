@@ -19,9 +19,8 @@ func main() {
 	b := make([]byte, 1)
 	src := fmt.Sprintf(h, h)
 	r := 0
-	var i int
 
-	for i = 0; true; i++ {
+	for i := 0; true; i++ {
 		_, e := os.Stdin.Read(b)
 		if e != nil {
 			if e != io.EOF {
