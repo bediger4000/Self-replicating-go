@@ -146,3 +146,12 @@ To create and try a Narcissist program:
     1
     $
 
+It occurs to me that you could do an almost-Narcissist with a checksum. In the source
+code of the Narcissist, put the calculated checksum of the source code. Read input bytes
+until end-of-file, calculate the checksum of the input bytes. If they match, the input
+bytes are the source code of the program. The better the checksum, the better the program's
+guess about the input bytes. Perhaps instead of a checksum, use a cryptographic hash.
+The problem is that caculating a hash or checksum and putting that value into the program's
+source changes the hash or checksum of the source. I doubt that process would converge if
+you iterated on the checksum or hash. You'd have to use a fairly bad checksum where you
+could predict changes in checksum based on changes in the program source.
