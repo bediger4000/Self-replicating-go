@@ -146,12 +146,26 @@ To create and try a Narcissist program:
     1
     $
 
-It occurs to me that you could do an almost-Narcissist with a checksum. In the source
-code of the Narcissist, put the calculated checksum of the source code. Read input bytes
-until end-of-file, calculate the checksum of the input bytes. If they match, the input
-bytes are the source code of the program. The better the checksum, the better the program's
-guess about the input bytes. Perhaps instead of a checksum, use a cryptographic hash.
-The problem is that caculating a hash or checksum and putting that value into the program's
-source changes the hash or checksum of the source. I doubt that process would converge if
-you iterated on the checksum or hash. You'd have to use a fairly bad checksum where you
-could predict changes in checksum based on changes in the program source.
+### Almost Narcissist  Program
+
+I created an "Almost Narcissistic" program as well. Instead of checking for
+file identity by comparing bytes and file lengths, an Almost-Narcissist reads
+bytes and calculates a checksum, or hash or CRC value. Using that value, it
+makes a decent guess at whether its input is the same as its source code.
+
+I chose CRC32 because I found a [PHP program that could cause CRC32 collisions](http://stackoverflow.com/questions/9285898/reversing-crc32/13394385#13394385).
+My Almost-Narcissist creates its own source code in-memory, just as the
+Narcissist program does. It calculates a CRC32 value for those in-memory bytes.
+It then calculates a CRC32 for whatever it reads on stdin, until end-of-file.
+If the CRC32 values match, the input bytes are _probably_ the source code of
+the program. Since one can [generate CRC32 collisions](http://www.reversing.be/article.php?story=20061209172953555) with ease, one can
+readily create a file that fools the Almost-Narcissist. Using a better hash,
+the Almost-Narcissist would get better at recognizing its own source.
+
+To create and try my Almost-Narcissist program:
+
+    $ make almost_narcissist
+    ...
+	$ ./almost_narcissist < almost_narcissist.go
+    1
+    $
