@@ -30,14 +30,12 @@ func main() {
 			if e != io.EOF {
 				r = 0
 			} else {
-					fmt.Printf("CRC of source: %%08x\n", crc)
-					xcrc = crc32.ChecksumIEEE(buffer)
-					fmt.Printf("CRC of input:  %%08x\n", xcrc)
-					if xcrc == crc {
-						r = 1
-					} else {
-						r = 0
-					}
+				xcrc = crc32.ChecksumIEEE(buffer)
+				if xcrc == crc {
+					r = 1
+				} else {
+					r = 0
+				}
 			}
 			break
 		} else {
