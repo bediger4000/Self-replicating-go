@@ -159,7 +159,7 @@ My Almost-Narcissist creates its own source code in-memory, just as the
 Narcissist program does. It calculates a CRC32 value for those in-memory bytes.
 It then calculates a CRC32 for whatever it reads on stdin, until end-of-file.
 If the CRC32 values match, the input bytes are _probably_ the source code of
-the program. Since one can [generate CRC32 collisions](https:github.com/bediger/crc32-file-collision-generator)
+the program. Since one can [generate CRC32 collisions](https://github.com/bediger4000/crc32-file-collision-generator)
 with ease, one can readily create a file that fools the Almost-Narcissist.
 Using a better hash, the Almost-Narcissist would get better at recognizing its
 own source.
