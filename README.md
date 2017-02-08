@@ -153,14 +153,16 @@ file identity by comparing bytes and file lengths, an Almost-Narcissist reads
 bytes and calculates a checksum, or hash or CRC value. Using that value, it
 makes a decent guess at whether its input is the same as its source code.
 
-I chose CRC32 because I found a [PHP program that could cause CRC32 collisions](http://stackoverflow.com/questions/9285898/reversing-crc32/13394385#13394385).
+I chose CRC32 because I had a vague recollection that you could easily
+create a CRC32 collision, where other hashes were much harder to create a collision.
 My Almost-Narcissist creates its own source code in-memory, just as the
 Narcissist program does. It calculates a CRC32 value for those in-memory bytes.
 It then calculates a CRC32 for whatever it reads on stdin, until end-of-file.
 If the CRC32 values match, the input bytes are _probably_ the source code of
-the program. Since one can [generate CRC32 collisions](http://www.reversing.be/article.php?story=20061209172953555) with ease, one can
-readily create a file that fools the Almost-Narcissist. Using a better hash,
-the Almost-Narcissist would get better at recognizing its own source.
+the program. Since one can [generate CRC32 collisions](https:github.com/bediger/crc32-file-collision-generator)
+with ease, one can readily create a file that fools the Almost-Narcissist.
+Using a better hash, the Almost-Narcissist would get better at recognizing its
+own source.
 
 To create and try my Almost-Narcissist program:
 
