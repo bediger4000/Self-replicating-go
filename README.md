@@ -124,7 +124,7 @@ Diffing `rx.go` and `ry.go` shows you the difference between the generator and t
 
 The actual self-replicating program (`ry.go` or `rz.go` in the example above) is almost identical to [mhilton's Go quine](https://github.com/mhilton/quine/blob/master/quine.go), differing only in the name of the sole variable. It appears that is the form of the minimum, officially formatted, self-replicating Go program.
 
-##Bonus Narcissist Program
+## Bonus Narcissist Program
 
 [Narcissist programs](https://rosettacode.org/wiki/Narcissist) read an input, and output a
 "1" if the input matches the source code of the Narcissist, and output a "0" if it doesn't
