@@ -2,42 +2,34 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 func main() {
 	h := `package main
 
 import (
+	"bytes"
 	"fmt"
-	"io"
 	"os"
 )
 
 func main() {
 	h := %q
-	b := make([]byte, 1)
-	src := fmt.Sprintf(h, h)
+	var b [1024]byte
+	var buffer []byte
+	src := []byte(fmt.Sprintf(h, h))
 	r := 0
 
-	for i := 0; true; i++ {
-		_, e := os.Stdin.Read(b)
-		if e != nil {
-			if e != io.EOF {
-				r = 0
-			} else {
-				if i == len(src) {
-					r = 1
-				}
+	for {
+		if n, e := os.Stdin.Read(b[0:]); n == 0 || e != nil {
+			if bytes.Equal(src, buffer) {
+				r = 1
 			}
 			break
+		} else {
+			buffer = append(buffer, b[0:n]...)
 		}
-		if i >= len(src) {
-			r = 0
-			break
-		}
-		if b[0] != src[i] {
-			r = 0
+		if len(buffer) > len(src) {
 			break
 		}
 	}
@@ -45,6 +37,5 @@ func main() {
 	fmt.Printf("%%d\n", r)
 }
 `
-	src := fmt.Sprintf(h, h)
-	fmt.Printf("%s", src)
+	fmt.Printf(h, h)
 }
