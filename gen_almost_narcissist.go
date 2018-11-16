@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 func main() {
@@ -17,35 +16,23 @@ import (
 
 func main() {
 	h := %q
-	b := make([]byte, 1)
-	src := fmt.Sprintf(h, h)
-	buffer := make([]byte, 0)
-	crc := crc32.ChecksumIEEE([]byte(src))
-	var xcrc uint32
+	var b [1024]byte
+	var buffer []byte
 	r := 0
-
-	for i := 0; true; i++ {
-		_, e := os.Stdin.Read(b)
-		if e != nil {
-			if e != io.EOF {
-				r = 0
-			} else {
-				xcrc = crc32.ChecksumIEEE(buffer)
-				if xcrc == crc {
+	for {
+		if n, e := os.Stdin.Read(b[:]); n == 0 || e != nil {
+			if n == 0 || e == io.EOF {
+				if crc32.ChecksumIEEE([]byte(fmt.Sprintf(h, h))) == crc32.ChecksumIEEE(buffer) {
 					r = 1
-				} else {
-					r = 0
 				}
 			}
 			break
 		} else {
-			buffer = append(buffer, b[0])
+			buffer = append(buffer, b[0:n]...)
 		}
 	}
-
 	fmt.Printf("%%d\n", r)
 }
 `
-	src := fmt.Sprintf(h, h)
-	fmt.Printf("%s", src)
+	fmt.Printf(h, h)
 }
