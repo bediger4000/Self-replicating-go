@@ -44,10 +44,8 @@ func main() {
 	}
 
 	fmt.Printf("%%d\n", r)
-	os.Exit(0)
 }
 `
 	src := fmt.Sprintf(h, h)
 	fmt.Printf("%s", src)
-	os.Exit(0)
 }
