@@ -199,3 +199,33 @@ To create and try my Almost-Narcissist program:
 	$ ./almost_narcissist < almost_narcissist.go
     1
     $
+
+### Self-Encrypting Program
+
+I saw [this web page](https://evervault.com/blog/this-code-encrypts-itself)
+on self-encrypting programs.
+These are clearly a variant of plain old self-replication,
+and the narcissist program.
+
+I wrote a Go version that outputs [Base 64-encoded](https://en.wikipedia.org/wiki/Base64)
+version of itself.
+Here, Base 64-encoding stands in for whatever encryption you might wish to apply.
+I'm lazy, I didn't want to generate some key pair and go to the trouble
+of learning how to decrypt some complicated format.
+
+```
+$ make self_encrypting
+...
+$ ./self_encrypting > x.b64
+$ base64 -d x.b64 > x.go
+$ go build x.go
+$ ./x > y.b64
+$ cksum x.b64 y.b64
+...
+$ diff self_encrypting.go x.go
+```
+
+The program `self_encrypting` outputs a Base 64
+encoded version of its own source code.
+You have to decode the Base-64-encoded source code to compile it,
+and then compile that decoded Base-64-encoded source code.
